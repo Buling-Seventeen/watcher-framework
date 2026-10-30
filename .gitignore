@@ -1,0 +1,14 @@
+# 私密的东西一律不进仓库
+.secrets/
+*.token
+*.key
+.env
+__pycache__/
+*.pyc
+
+# 真实的记忆和人格不进仓库（本仓库只放示例）
+memory/MEMORY.md
+memory/shared_memory.md
+persona/persona.md
+memory/daily/*.md
+!memory/daily/README.md
