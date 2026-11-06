@@ -1,18 +1,25 @@
 # -*- coding: utf-8 -*-
 """配置示例 —— 复制成 config.py 再改
 
-不要把真实的 config.py 提交到仓库（.gitignore 已经排除了）。
-也可以不用这个文件，直接设环境变量：
+    cp sync/config.py.example sync/config.py
 
-    export SYNC_HOST=http://你的服务器
-    export SYNC_TOKEN=你的同步口令
+**别把真实的 config.py 提交到仓库**（.gitignore 已经排除了）。
+也可以不用这个文件，直接设环境变量，名字写在每项后面。
 """
 
-# 你的同步服务器地址（带 http:// 或 https://）
+# 你的同步服务器地址，带 http:// 或 https://      环境变量：SYNC_HOST
 HOST = "http://YOUR_SERVER"
 
-# 同步口令（跟你服务器上的一致）
+# 同步口令，跟服务器上设的一致                      环境变量：SYNC_TOKEN
 TOKEN = "YOUR_SYNC_TOKEN"
+
+# 日志目录：MEMORY.md 和每天的日志放在哪           环境变量：MEM_DIR
+# 留空就用本目录下的 memory/daily
+MEM_DIR = ""
+
+# 装了依赖的那个 python（视频分析、对话归档要用 paramiko）
+# 留空就用当前跑 watch_memory.py 的那个            环境变量：PY_EXE
+PY_EXE = ""
 
 # 显示对话时用的名字
 WHO = {

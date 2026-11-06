@@ -12,3 +12,6 @@ memory/shared_memory.md
 persona/persona.md
 memory/daily/*.md
 !memory/daily/README.md
+
+# 本机配置（照着 config.py.example 自己写一份，别提交）
+config.py

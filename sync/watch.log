@@ -1,0 +1,5 @@
+[2026-11-06 11:36:22] 记忆守望者启动，每 20 秒检查一次
+[2026-11-06 11:36:22] 已记录 0 个文件
+[2026-11-06 11:36:25] 我的记忆已同步（她那边 → 我这边）
+[2026-11-06 11:36:25] ? 电脑端对话推送失败 URLError: <urlopen error [Errno 11001] getaddrinfo failed>
+[2026-11-06 11:37:05] 没读到服务器地址。把 sync/config.py.example 复制成 sync/config.py，填上 HOST 和 TOKEN 再跑；或者设 SYNC_HOST / SYNC_TOKEN 环境变量。
