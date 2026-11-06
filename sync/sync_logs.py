@@ -11,13 +11,25 @@
 import hashlib
 import json
 import os
+# 配置：同目录的 config.py，或者环境变量
+try:
+    import config as _cfg
+except Exception:
+    _cfg = None
+
+
+def _conf(name, env, default=""):
+    v = getattr(_cfg, name, "") if _cfg else ""
+    return v or os.environ.get(env, "") or default
 import sys
 import urllib.error
 import urllib.request
 
-HOST = os.environ.get("SYNC_HOST", "http://YOUR_SERVER")
-TOKEN = os.environ.get("SYNC_TOKEN", "")
-MEM_DIR = r"D:/系统默认/文档/.workbuddy/memory"
+HOST = _conf("HOST", "SYNC_HOST", "http://YOUR_SERVER")
+TOKEN = _conf("TOKEN", "SYNC_TOKEN")
+MEM_DIR = _conf("MEM_DIR", "MEM_DIR",
+                os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "..", "memory", "daily"))
 BASE = os.path.dirname(os.path.abspath(__file__))
 STATE = os.path.join(BASE, ".logs_synced.json")
 

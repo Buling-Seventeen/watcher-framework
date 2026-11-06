@@ -6,20 +6,32 @@
 跑一次，就把：
   - auto_memory.md（她的日常流水）
   - 今天的对话（**从服务器拉，网页/QQ 上的都在里面**）
-写进 D:/系统默认/文档/.workbuddy/memory/YYYY-MM-DD.md 的一个固定区块。
+写进日志目录下的 YYYY-MM-DD.md 里一个固定区块。
 
 服务器拉不到才退回读本地 chat_history.jsonl。
 每次覆盖那个区块，不会重复堆叠。
 """
 import json
 import os
+# 配置：同目录的 config.py，或者环境变量
+try:
+    import config as _cfg
+except Exception:
+    _cfg = None
+
+
+def _conf(name, env, default=""):
+    v = getattr(_cfg, name, "") if _cfg else ""
+    return v or os.environ.get(env, "") or default
 import urllib.request
 from datetime import datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-MEM_DIR = r"D:/系统默认/文档/.workbuddy/memory"
-HOST = os.environ.get("SYNC_HOST", "http://YOUR_SERVER")
-TOKEN = os.environ.get("SYNC_TOKEN", "")
+MEM_DIR = _conf("MEM_DIR", "MEM_DIR",
+                os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "..", "memory", "daily"))
+HOST = _conf("HOST", "SYNC_HOST", "http://YOUR_SERVER")
+TOKEN = _conf("TOKEN", "SYNC_TOKEN")
 
 AUTO = os.path.join(BASE, "auto_memory.md")
 HIST = os.path.join(BASE, "chat_history.jsonl")
