@@ -21,6 +21,8 @@ import urllib.request
 from datetime import datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
+# 子进程输出统一用 UTF-8，不然中文按 GBK 出来会成乱码
+_SUBPENV = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
 
 # 配置：优先读同目录的 config.py，没有就读环境变量。
 # 仓库里只放 config.py.example，真的 config.py 不进仓库。
@@ -241,7 +243,7 @@ def video_job():
     try:
         r = subprocess.run([video_py(), vb], capture_output=True, text=True,
                            encoding="utf-8", errors="ignore", timeout=900,
-                           cwd=BASE,
+                           cwd=BASE, env=_SUBPENV,
                            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         out = (r.stdout or "").strip()
         if out and "待分析 0" not in out:
@@ -270,7 +272,7 @@ def archive_job():
     sc = os.path.join(BASE, "_archive_chat.py")
     try:
         r = subprocess.run([video_py(), sc], capture_output=True, text=True,
-                           encoding="utf-8", errors="ignore", timeout=300, cwd=BASE,
+                           encoding="utf-8", errors="ignore", timeout=300, cwd=BASE, env=_SUBPENV,
                            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         out = (r.stdout or "").strip()
         if out:
@@ -509,7 +511,7 @@ def gitee_job():
     sc = os.path.join(BASE, "_backup_gitee.py")
     try:
         r = subprocess.run([video_py(), sc], capture_output=True, text=True,
-                           encoding="utf-8", errors="ignore", timeout=600, cwd=BASE,
+                           encoding="utf-8", errors="ignore", timeout=600, cwd=BASE, env=_SUBPENV,
                            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         out = (r.stdout or "").strip()
         ok = "已同步" in out
