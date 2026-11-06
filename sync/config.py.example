@@ -17,6 +17,10 @@ TOKEN = "YOUR_SYNC_TOKEN"
 # 留空就用本目录下的 memory/daily
 MEM_DIR = ""
 
+# 对话工程目录：电脑端的对话从这里读出来推给另一处   环境变量：PROJ
+# 留空就用本目录下的 memory/projects
+PROJ = ""
+
 # 装了依赖的那个 python（视频分析、对话归档要用 paramiko）
 # 留空就用当前跑 watch_memory.py 的那个            环境变量：PY_EXE
 PY_EXE = ""
